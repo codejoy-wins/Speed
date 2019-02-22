@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Footer from './components/Footer';
 
 class App extends Component {
   getRandomColor = ()=> {
@@ -158,6 +158,7 @@ class App extends Component {
             Slow down? 
           </div>
         </header>
+        < Footer />
       </div>
     );
   }
