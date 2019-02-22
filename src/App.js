@@ -50,6 +50,10 @@ class App extends Component {
     console.log("reverting to save");
     console.log(`reverting to this save color: ${this.state.save.color}`);
     this.setState(this.state.save)
+    // this only works for a one time reload
+    // if(!this.state.save.color){
+    //   this.saveSettings();
+    // }
   }
 
   changeSpeed = (newSpeed)=>{
@@ -84,7 +88,7 @@ class App extends Component {
   }
   
   render() {
-    const { color, nextColor, temp, speed, logoColor } = this.state;
+    const { color, nextColor, temp, speed, logoColor, save } = this.state;
     const dyno = {
       "color": color,
       "background": temp,
@@ -123,15 +127,30 @@ class App extends Component {
       "color":"white",
     }
 
+    
+
+    const DynamicStuff = boolie => {
+      let msg = ""
+      if(save.color){
+        msg = "SAVE AVAILABLE!"
+      }else{
+        msg = "no saves on file"
+      }
+      return(
+        <h2 style = {myButton}>{msg}</h2>
+      )
+    }
+
     return (
       <div className="App" >
         <header className="App-header" style={dyno}>
           <div >
             <h3 style={dyno} onClick={()=>this.saveSettings()} >Save Settings?</h3>
-            <h5 style={dyno} onClick={()=>this.revertSave()} >Revert to Save</h5>
+            <h5 style={dyno} onClick={()=>this.revertSave()} >Revert to save. </h5>
+            <DynamicStuff />
           </div>
           
-          <p style={dyno} style={myButton} onClick={()=>this.mod(nextColor)} >
+          <p style={dyno} onClick={()=>this.mod(nextColor)} >
             Flip to {nextColor}
           </p>
           <div style={myButton} onClick = {()=>this.newTextColor()}>
