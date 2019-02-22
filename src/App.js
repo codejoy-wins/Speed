@@ -17,6 +17,7 @@ class App extends Component {
     nextColor: "hotpink",
     temp: "white",
     speed: "3",
+    save: {},
   }
 // lavender = #2664D6
   mod = newColor => {
@@ -33,6 +34,19 @@ class App extends Component {
       color: nextColor,
       nextColor: color,
     })
+  }
+
+  // Save
+  saveSettings = ()=>{
+    this.setState({
+      save: this.state
+    })
+  }
+
+  revertSave =()=>{
+    console.log("reverting to save");
+    console.log(`reverting to this save color: ${this.state.save.color}`);
+    this.setState(this.state.save)
   }
 
   changeSpeed = (newSpeed)=>{
@@ -90,28 +104,43 @@ class App extends Component {
     //   pointer-events: none;
     // }
 
+    const myButton = {
+      "padding": ".4rem"
+    }
+
+    const myInfo = {
+      "background":"black",
+      "color":"white",
+    }
+
     return (
       <div className="App" >
         <header className="App-header" style={dyno}>
-          <img src={logo} className="App-logo" alt="logo" />
-          <p style={dyno} onClick={()=>this.mod(nextColor)} >
-            Turn {nextColor}.
+          <div >
+            <h3 style={dyno} onClick={()=>this.saveSettings()} >Save Settings?</h3>
+            <h5 style={dyno} onClick={()=>this.revertSave()} >Revert to Save</h5>
+          </div>
+          
+          <p style={dyno} style={myButton} onClick={()=>this.mod(nextColor)} >
+            Flip to {nextColor}
           </p>
-          <div onClick = {()=>this.newTextColor()}>
+          <div style={myButton} onClick = {()=>this.newTextColor()}>
             Change Font Color
           </div>
-          <div onClick = {()=>this.newBackgroundColor()}>
+          <div style={myButton} onClick = {()=>this.newBackgroundColor()}>
             Get Random Background Color
           </div>
-          <div>
-            Current Background Color is: {temp}
-            Current Font Color is: {color}
-            Current Speed is: {speed}
-
+          <div style={myInfo}>
+            <p>Background: {temp}</p>
+            <p>Font: {color}</p>
+            <p>Speed: {speed}</p>
           </div>
           < MyLogo />
-          <div onClick={()=>this.changeSpeed(30)}>
-            Slow time? 
+          <div onClick={()=>this.changeSpeed(speed-.5)}>
+            Speed Up? 
+          </div>
+          <div onClick={()=>this.changeSpeed(speed+.5)}>
+            Slow down? 
           </div>
         </header>
       </div>
