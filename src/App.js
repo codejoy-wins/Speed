@@ -125,6 +125,8 @@ class App extends Component {
     const myInfo = {
       "background":"black",
       "color":"white",
+      "padding": "1rem",
+      "opacity": ".6"
     }
 
     
@@ -132,12 +134,12 @@ class App extends Component {
     const DynamicStuff = boolie => {
       let msg = ""
       if(save.color){
-        msg = "SAVE AVAILABLE!"
+        msg = "Load Saved Settings"
       }else{
         msg = "no saves on file"
       }
       return(
-        <h2 style = {myButton}>{msg}</h2>
+        <h2 onClick={this.revertSave} style={myInfo}>{msg}</h2>
       )
     }
 
@@ -145,8 +147,7 @@ class App extends Component {
       <div className="App" >
         <header className="App-header" style={dyno}>
           <div >
-            <h3 style={dyno} onClick={()=>this.saveSettings()} >Save Settings?</h3>
-            <h5 style={dyno} onClick={()=>this.revertSave()} >Revert to save. </h5>
+            <h3 style={dyno} onClick={()=>this.saveSettings()} >Save?</h3>
             <DynamicStuff />
           </div>
           
