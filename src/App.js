@@ -35,6 +35,16 @@ class App extends Component {
     })
   }
 
+  changeSpeed = (newSpeed)=>{
+    const { speed } = this.state
+    console.log(`
+      changing ${speed} to ${newSpeed}
+    `)
+    this.setState({
+      speed: newSpeed
+    })
+  }
+
   newTextColor = ()=> {
     console.log("changing text color")
     this.setState({
@@ -100,6 +110,9 @@ class App extends Component {
 
           </div>
           < MyLogo />
+          <div onClick={()=>this.changeSpeed(30)}>
+            Slow time? 
+          </div>
         </header>
       </div>
     );
