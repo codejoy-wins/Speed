@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import Footer from './components/Footer';
+import Header from './components/Header';
+
 
 class App extends Component {
   getRandomColor = ()=> {
@@ -13,9 +15,9 @@ class App extends Component {
   }
 
   state = {
-    color: "coral",
+    color: "#29C4FB",
     nextColor: "hotpink",
-    temp: "white",
+    temp: "#6D52DE",
     speed: 3,
     logoColor: "#61DAFB",
     lastSpeed: 0,
@@ -155,15 +157,16 @@ class App extends Component {
 
     return (
       <div className="App" >
+        < Header/>
         <header className="App-header" style={dyno}>
           <div >
             <h3 style={dyno} onClick={()=>this.saveSettings()} >Save?</h3>
             <DynamicStuff />
           </div>
           
-          <p style={dyno} onClick={()=>this.mod(nextColor)} >
+          {/* <p style={dyno} onClick={()=>this.mod(nextColor)} >
             Flip to {nextColor}
-          </p>
+          </p> */}
           <div style={myButton} onClick = {()=>this.newTextColor()}>
             Change Font Color
           </div>
