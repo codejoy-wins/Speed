@@ -33,8 +33,6 @@ class App extends Component {
       temp is ${temp}
       speed is ${speed}
       logo is ${logoColor}
-
-
     `);
     // random color function needed
     this.setState({
@@ -98,6 +96,28 @@ class App extends Component {
     })
   }
   
+  rainbow = ()=> {
+    console.log("rainbowing");
+    // flashing logo colors at set interval
+    this.setState({
+      speed: .2,
+    })
+      setInterval(()=>{
+        this.setState({
+          logoColor: this.getRandomColor(),
+        })
+      }, 500);
+    
+
+
+    for(let i=0; i < 15; i++){
+
+    }
+    this.setState({
+      logoColor: this.getRandomColor(),
+    })
+  }
+
   render() {
     const { color, nextColor, temp, speed, logoColor, save } = this.state;
     const velocity = speed+.25;
@@ -191,6 +211,9 @@ class App extends Component {
           </div>
           <div onClick={()=>this.changeSpeed((velocity))}>
             Slow down? 
+          </div>
+          <div onClick={()=>this.rainbow()}>
+            Rainbow?
           </div>
         </header>
         < Footer />
