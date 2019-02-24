@@ -214,6 +214,8 @@ class App extends Component {
             </div>
             <div onClick={this.moderator}>
             < MyLogo />
+          < MyLogo />
+
             </div>
             <div onClick={()=>this.changeSpeed(speed-.25)}>
               Speed Up? 
