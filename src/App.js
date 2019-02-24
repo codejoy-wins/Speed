@@ -18,6 +18,7 @@ class App extends Component {
     temp: "white",
     speed: 3,
     logoColor: "#61DAFB",
+    lastSpeed: 0,
     save: {},
   }
 
@@ -80,7 +81,14 @@ class App extends Component {
       logoColor: this.getRandomColor(),
     })
   }
-
+  freeze = ()=>{
+    console.log("freezing speed");
+    let temp = this.state.speed;
+    this.setState({
+      speed:this.state.lastSpeed,
+      lastSpeed: temp,
+    })
+  }
   newBackgroundColor = ()=> {
     console.log("changing background color")
     this.setState({
@@ -172,7 +180,9 @@ class App extends Component {
               <li>Speed: {speed}</li>
             </ul>
           </div>
+          <div onClick={this.freeze}>
           < MyLogo />
+          </div>
           <div onClick={()=>this.changeSpeed(speed-.25)}>
             Speed Up? 
           </div>
