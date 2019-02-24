@@ -20,7 +20,7 @@ class App extends Component {
     temp: "#6D52DE",
     speed: 3,
     logoColor: "#61DAFB",
-    lastSpeed: 0,
+    lastSpeed: 0.17,
     save: {},
   }
 
