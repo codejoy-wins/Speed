@@ -21,6 +21,7 @@ class App extends Component {
     speed: 3,
     logoColor: "#61DAFB",
     lastSpeed: 0.17,
+    rainboo: false,
     save: {},
   }
 
@@ -100,12 +101,15 @@ class App extends Component {
     console.log("rainbowing");
     // flashing logo colors at set interval
     this.setState({
-      speed: .2,
+      speed: .25,
+      rainboo: true,
     })
       setInterval(()=>{
-        this.setState({
-          logoColor: this.getRandomColor(),
-        })
+        if(this.state.rainboo == true){
+          this.setState({
+            logoColor: this.getRandomColor(),
+          })
+        }
       }, 500);
     
 
@@ -118,6 +122,22 @@ class App extends Component {
     })
   }
 
+  steady = ()=>{
+    console.log("stopping rainbow");
+    this.setState({
+      speed: 4,
+      rainboo: false,
+    })
+  }
+
+  moderator = ()=>{
+    // chooses whether to rainbow or steady
+    if(this.state.rainboo == true){
+      this.steady();
+    }else{
+      this.rainbow();
+    }
+  }
   render() {
     const { color, nextColor, temp, speed, logoColor, save } = this.state;
     const velocity = speed+.25;
@@ -174,7 +194,38 @@ class App extends Component {
         <h2 onClick={this.revertSave} style={myInfo}>{msg}</h2>
       )
     }
-
+    if(this.state.rainboo==true){
+      return (
+        <div className="App" >
+          < Header/>
+          <header className="App-header" style={dyno}>
+            <div >
+              <h3 style={dyno} onClick={()=>this.saveSettings()} >Save?</h3>
+              <DynamicStuff />
+            </div>
+            <div style={myButton} onClick = {()=>this.newTextColor()}>
+              Change Font Color
+            </div>
+            <div style={myButton} onClick = {()=>this.newLogoColor()}>
+              Change Logo Color
+            </div>
+            <div style={myButton} onClick = {()=>this.newBackgroundColor()}>
+              Get Random Background Color
+            </div>
+            <div onClick={this.moderator}>
+            < MyLogo />
+            </div>
+            <div onClick={()=>this.changeSpeed(speed-.25)}>
+              Speed Up? 
+            </div>
+            <div onClick={()=>this.changeSpeed((velocity))}>
+              Slow down? 
+            </div>
+          </header>
+          < Footer />
+        </div>
+      );
+    }
     return (
       <div className="App" >
         < Header/>
@@ -203,7 +254,7 @@ class App extends Component {
               <li>Speed: {speed}</li>
             </ul>
           </div>
-          <div onClick={this.freeze}>
+          <div onClick={this.moderator}>
           < MyLogo />
           </div>
           <div onClick={()=>this.changeSpeed(speed-.25)}>
@@ -211,9 +262,6 @@ class App extends Component {
           </div>
           <div onClick={()=>this.changeSpeed((velocity))}>
             Slow down? 
-          </div>
-          <div onClick={()=>this.rainbow()}>
-            Rainbow?
           </div>
         </header>
         < Footer />
