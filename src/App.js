@@ -16,10 +16,11 @@ class App extends Component {
     color: "coral",
     nextColor: "hotpink",
     temp: "white",
-    speed: "3",
+    speed: 3,
     logoColor: "#61DAFB",
     save: {},
   }
+
 // lavender = #2664D6
   mod = newColor => {
     const { color, nextColor, temp, speed, logoColor } = this.state;
@@ -89,6 +90,7 @@ class App extends Component {
   
   render() {
     const { color, nextColor, temp, speed, logoColor, save } = this.state;
+    const velocity = speed+.25;
     const dyno = {
       "color": color,
       "background": temp,
@@ -171,10 +173,10 @@ class App extends Component {
             </ul>
           </div>
           < MyLogo />
-          <div onClick={()=>this.changeSpeed(speed-.5)}>
+          <div onClick={()=>this.changeSpeed(speed-.25)}>
             Speed Up? 
           </div>
-          <div onClick={()=>this.changeSpeed(speed+.5)}>
+          <div onClick={()=>this.changeSpeed((velocity))}>
             Slow down? 
           </div>
         </header>
